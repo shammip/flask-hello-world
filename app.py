@@ -1,18 +1,25 @@
+# Lab 10 - Use Render to Host Website & Database
+# Name: Shammi Pereira
+# Date: April 1, 2025
+
 import psycopg2
 
 from flask import Flask
 app = Flask(__name__)
 
+# Greeting
 @app.route('/')
 def hello_world():
     return 'Hello World from Shammi in 3308'
 
+# Testing database
 @app.route('/db_test')
 def testing():
     conn = psycopg2.connect("postgresql://cspb3308data_user:cVEDPxhcrub7Rr1N4NaxpU1Vi8sl3sCy@dpg-cvm5lu9r0fns7380utf0-a/cspb3308data")
     conn.close()
     return 'Database Connection Successful'
 
+# Creating table 
 @app.route('/db_create')
 def creating():
     conn = psycopg2.connect("postgresql://cspb3308data_user:cVEDPxhcrub7Rr1N4NaxpU1Vi8sl3sCy@dpg-cvm5lu9r0fns7380utf0-a/cspb3308data")
@@ -30,6 +37,7 @@ def creating():
     conn.close()
     return 'Basketball Table Successfully Created'
 
+# Inserting data into table 
 @app.route('/db_insert')
 def inserting():
     conn = psycopg2.connect("postgresql://cspb3308data_user:cVEDPxhcrub7Rr1N4NaxpU1Vi8sl3sCy@dpg-cvm5lu9r0fns7380utf0-a/cspb3308data")
@@ -46,6 +54,7 @@ def inserting():
     conn.close()
     return 'Basketball Table Successfully Populated'
 
+# Displaying table 
 @app.route('/db_select')
 def selecting():
     conn = psycopg2.connect("postgresql://cspb3308data_user:cVEDPxhcrub7Rr1N4NaxpU1Vi8sl3sCy@dpg-cvm5lu9r0fns7380utf0-a/cspb3308data")
@@ -65,6 +74,7 @@ def selecting():
     response_string += "</table>"
     return response_string
     
+# Dropping table
 @app.route('/db_drop')
 def dropping():
     conn = psycopg2.connect("postgresql://cspb3308data_user:cVEDPxhcrub7Rr1N4NaxpU1Vi8sl3sCy@dpg-cvm5lu9r0fns7380utf0-a/cspb3308data")
